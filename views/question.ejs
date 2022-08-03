@@ -1,0 +1,22 @@
+<%- include('./partials/header.ejs') %>
+<%- include('./partials/navbar.ejs') %>
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <h3>Make a question!</h3>
+            </div>
+            <div class="card-body">
+                <form method="GET">
+                    <label for="title">Title</label>
+                    <input class="form-control" id="title" type="text" placeholder="Default input">
+                    <br>
+                    <label for="description">Description</label>
+                    <input class="form-control" id="description" type="text" placeholder="Default input">
+                    <br>
+                    <button class="btn btn-success">Make it</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+<%- include('./partials/footer.ejs') %>
