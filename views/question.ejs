@@ -6,12 +6,12 @@
                 <h3>Make a question!</h3>
             </div>
             <div class="card-body">
-                <form method="GET">
+                <form method="POST" action="/makequestion">
                     <label for="title">Title</label>
-                    <input class="form-control" id="title" type="text" placeholder="Default input">
+                    <input class="form-control" id="title" type="text" placeholder="Default input" name="title">
                     <br>
                     <label for="description">Description</label>
-                    <input class="form-control" id="description" type="text" placeholder="Default input">
+                    <input class="form-control" id="description" type="text" placeholder="Default input" name="description">
                     <br>
                     <button class="btn btn-success">Make it</button>
                 </form>

@@ -1,8 +1,22 @@
+const bodyParser = require('body-parser')
 const express = require('express')
 const app = express()
+const connection = require('./database/database')
+const questionModel = require("./database/Question")
+
+connection
+    .authenticate()
+    .then(()=>{
+        console.log("conexão feita com sucesso")
+    })
+    .catch((err)=>{
+        console.log(err)
+    })
 
 app.set('view engine','ejs')
-app.set(express.static("public"))
+app.use(express.static("public"))
+app.use(bodyParser.urlencoded({extended: false}))
+app.use(bodyParser.json())
 
 app.get("/",(req,res)=>{
     res.render('index')
@@ -12,6 +26,13 @@ app.get("/question", (req, res) => {
     res.render('question')
 })
 
+app.post("/makequestion", (req, res) => {
+    const { title } = req.body
+    const { description}  = req.body 
+    
+    res.send(title)
+})
+
 app.listen(8080, ()=>{
-    console.log("blbA")
+    console.log("servidor rodando na porta 8080")
 })
