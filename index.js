@@ -19,7 +19,14 @@ app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
 
 app.get("/",(req,res)=>{
-    res.render('index')
+    question.findAll({raw: true, order:[
+        ['id', 'DESC']
+    ]}).then(data=>{
+        console.log(data)
+        res.render('index',{
+            questions: data
+        })
+    })
 })
 
 app.get("/question", (req, res) => {
