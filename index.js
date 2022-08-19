@@ -2,7 +2,7 @@ const bodyParser = require('body-parser')
 const express = require('express')
 const app = express()
 const connection = require('./database/database')
-const questionModel = require("./database/Question")
+const question = require("./database/Question")
 
 connection
     .authenticate()
@@ -30,8 +30,14 @@ app.post("/makequestion", (req, res) => {
     const { title } = req.body
     const { description}  = req.body 
     
-    res.send(title)
+    question.create({
+        title: title,
+        description: description,
+    }).then(()=>{
+        res.redirect('/')
+    })
 })
+
 
 app.listen(8080, ()=>{
     console.log("servidor rodando na porta 8080")
