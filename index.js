@@ -3,6 +3,7 @@ const express = require('express')
 const app = express()
 const connection = require('./database/database')
 const question = require("./database/Question")
+const answers = require("./database/Answers")
 
 connection
     .authenticate()
@@ -42,6 +43,34 @@ app.post("/makequestion", (req, res) => {
         description: description,
     }).then(()=>{
         res.redirect('/')
+    })
+})
+
+app.get('/question/:id', (req,res)=>{
+    const {id} = req.params
+    question.findOne({
+        where: {id: id}
+    })
+    .then(data=>{
+        if(data != undefined){
+            res.render('question-page',{
+                question: data
+            })
+        }else{
+            res.redirect('/')
+        }
+    })
+})
+
+app.post("/reply", (req,res)=>{
+    const body = req.body.body
+    const { question } = req.body
+
+    answers.create({
+        body: body,
+        questionid: question ,
+    }).then(()=>{
+        res.redirect("/question/"+question)
     })
 })
 

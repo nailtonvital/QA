@@ -1,5 +1,6 @@
 <%- include('./partials/header.ejs') %>
 <%- include('./partials/navbar.ejs') %>
+
     <div class="container">
         <a href="/question" class="btn btn-primary">Perguntar</a>
         <% questions.forEach(question=>{ %>
@@ -8,7 +9,7 @@
                     <h3><%= question.title %></h3>
                 </div>
                 <div class="card-footer">
-                    <button class="btn btn-primary">Saiba mais</button>
+                    <a href="/question/<%= question.id %>"><button class="btn btn-primary">Saiba mais</button></a>
                 </div>
             </div>
         <% }) %> 

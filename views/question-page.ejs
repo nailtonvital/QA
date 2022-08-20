@@ -1,0 +1,17 @@
+<%- include('./partials/header.ejs') %>
+<%- include('./partials/navbar.ejs') %>
+
+    <div class="container">
+        <hr>
+        <h3><%= question.title %></h3>
+        <p><%= question.description %></p>
+        <hr>
+        <form class="form-control mb-1" method="post" action="/reply">
+            <h3>Reply</h3>
+            <textarea class="form-control" placeholder="Type your answer" name="body"></textarea>
+            <input type="hidden" name="question" value="<%= question.id %>">
+            <button type="submit" class="btn btn-success mt-1">Send reply</button>
+        </form>
+    </div>
+    
+<%- include('./partials/footer.ejs') %>
