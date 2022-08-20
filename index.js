@@ -48,14 +48,24 @@ app.post("/makequestion", (req, res) => {
 
 app.get('/question/:id', (req,res)=>{
     const {id} = req.params
+    
     question.findOne({
         where: {id: id}
     })
-    .then(data=>{
-        if(data != undefined){
-            res.render('question-page',{
-                question: data
+    .then(question=>{
+        if(question != undefined){
+            answers.findAll({
+                where: {
+                    questionid: id
+                },
+                order: [['id','DESC']]
+            }).then(data=>{
+                res.render('question-page', {
+                    question: question,
+                    answers: data,
+                })
             })
+            
         }else{
             res.redirect('/')
         }
